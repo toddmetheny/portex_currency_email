@@ -18,15 +18,14 @@ currencies.each {|currency| exchange_rates += "#{currency}: #{rates[currency]}\n
 
 p "exchange_rates: #{exchange_rates}"
 
-# emails = ['todd.metheny@lana.com', 'sam@portexpro.com', 'brittany@portexpro.com']
-emails = ['todd.metheny@lana.com']
+emails = ['todd.metheny@lana.com', 'sam@portexpro.com', 'brittany@portexpro.com']
 
 # send an email
 emails.each do |email|
   from = Email.new(email: 'todd.metheny@gmail.com')
   to = Email.new(email: email)
   subject = 'Portex daily conversion rate email'
-  content = Content.new(type: 'text/plain', value: "Great talking today! Obviously this should look pretty. This is generated from a simple ruby script that grabs many exchange rates via an api call. \n #{exchange_rates} \n\n Todd")
+  content = Content.new(type: 'text/plain', value: "Great talking today! Obviously this should look pretty. This is generated from a simple ruby script that grabs many exchange rates via an api call. \n\n #{exchange_rates} \n\n Here's the code if you'd like: https://github.com/toddmetheny/portex_currency_email \n\n Todd")
   mail = Mail.new(from, subject, to, content)
 
   sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
